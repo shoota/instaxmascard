@@ -1,8 +1,13 @@
+module.exports = {
+    index:function(req, res){
+        res.send('this is users');
+    },
+    show: function(req, res){
+        res.send(req.params.user);
+    },
 
-/*
- * GET users listing.
- */
+    new: function(req, res){
 
-exports.list = function(req, res){
-  res.send("respond with a resource");
+        res.send(200);
+    }
 };
