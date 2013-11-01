@@ -15,7 +15,8 @@ app.configure(function(){
     app.set('port', process.env.PORT || 3000);
     app.set('views', __dirname + '/views');
     app.set('view engine', 'ejs');
-    app.use(express.favicon());
+    //FIXME 独自のファビコンを設定する
+//    app.use(express.favicon());
     app.use(express.logger('dev'));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
@@ -28,6 +29,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
+app.resource('cards', require('./routes/card'));
 app.resource('users', require('./routes/user'));
 
 http.createServer(app).listen(app.get('port'), function(){
