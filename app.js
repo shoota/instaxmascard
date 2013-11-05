@@ -29,8 +29,7 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.resource('cards', require('./routes/card'));
-app.resource('users', require('./routes/user'));
+app.resource('cards', require('./routes/cards'));
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));
