@@ -2,7 +2,19 @@
 <html>
 <% include head.ejs %>
 <body>
-<h1><%= messagea %></h1>
-<p>Welcome to <%= title %></p>
+<header>
+    ヘッダーヘッダーヘッダーヘッダーヘッダーヘッダーヘッダーヘッダーヘッダーヘッダー
+</header>
+
+<% cards.forEach(function(card){ %>
+<div class="card">
+    <img src="<%= card.imgsrc %>">
+    created by <%= card.author %> at <%= card.date%>
+</div>
+<% }) %>
+
+<footer>
+    フッターフッターフッターフッターフッターフッターフッターフッターフッターフッターフッター
+</footer>
 </body>
 </html>

@@ -1,13 +1,16 @@
-module.exports={
+var cardModel = require('../model/cards.js').cardModel;
 
+module.exports={
     //カードの一覧を表示
-   index: function(){
+   index: function(req, res){
        //ViewHelper
        var ejsObj={
-           title:""
+           title:"最近つくられたカード"
        };
 
        // 12件のカードを取得する
+       var images=cardModel.findAny();
+       ejsObj.cards = images;
 
        res.render('cardList', ejsObj);
 
@@ -17,14 +20,23 @@ module.exports={
     show:function(req, res){
 
         //ViewHelper
-        var ejsObj ={};
-
+        var ejsObj ={
+            title: "insta X'mas card"
+        };
         // cardのid=user名を受け取る
-        var user = req.params.card;
-        // 画像名を取得
+        var cardId = req.params.card;
+        // カードを取得
+        card = cardModel.findOne(cardId);
 
+        if(card) {
+            ejsObj.message = "さんのつくったカードです";
+            ejsObj.card=card;
 
-        res.render('cardView', ejsObj);
+            res.render('cardView', ejsObj);
+        }else{
+            res.send(404);
+
+        }
     },
 
     // カード生成(POST)
