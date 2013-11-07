@@ -9,7 +9,7 @@ module.exports.cardModel = {
 
         for(var i=0; i<12 ; i++){
             cards[i] = {
-                imgsrc:"/img/sample.jpg",
+                imgsrc:"/content/img/sample.jpg",
                 author:"sample"+ i.toString(),
                 date: "2013/12/01",
                 igsrc:"hogehgoe"
