@@ -30,8 +30,7 @@ app.configure('development', function(){
 
 app.get('/xmascard', routes.index);
 app.get('/xmascard/auth', require('./routes/oauth').igauth);
-// TODO typo
-app.get('/xmascard/dashbord', require('./routes/dashboard').dashboard);
+app.get('/xmascard/dashboard', require('./routes/dashboard').dashboard);
 app.resource('xmascard/cards', require('./routes/cards'));
 
 http.createServer(app).listen(app.get('port'), function(){

@@ -2,32 +2,41 @@
 /*
  * GET home page.
  */
-
-var instagram = require('instagram-node-lib'),
+//var instagram = require('instagram-node-lib'),
+var request = require('request'),
     igConf=require('../model/ig-conf.json');
-
-instagram.set('client_id', igConf.client_id);
-instagram.set('client_secret', igConf.client_secret);
+//
+//instagram.set('client_id', igConf.client_id);
+//instagram.set('client_secret', igConf.client_secret);
 //instagram.set('redirect_uri', igConf.redirect_uri);
 
 exports.dashboard = function(req, res){
-    instagram.oauth.ask_for_access_token({
-        request: req,
-        response: res,
-        redirect: igConf.redirect_uri,
-        complete: function(params, response){
-            console.log('success');
-            response.send(params['access_token']);
-            //response.render('dashBoard', {access_token: params['access_token']});
-            response.end();
+
+    var CODE = req.query.code;
+
+    var options = {
+        uri: 'https://api.instagram.com/oauth/access_token',
+        form: {
+            client_id:igConf.client_id,
+            client_secret: igConf.client_secret,
+            grant_type:"authorization_code",
+            redirect_uri:igConf.redirect_uri,
+            code: CODE
         },
+        json: true
+    };
 
-        error: function(errMsg, errObj, caller, response){
-            console.log(errMsg);
-            response.send(406);
+    request.post(options, function(error, response, body){
+        if (!error && response.statusCode == 200) {
+
+            var ejsObj={
+                title:"ダッシュボード",
+                oauth: body
+            };
+            res.render('dashboard', ejsObj);
+        } else {
+            console.log('error: '+ response.statusCode);
+            res.send(500,'auth error'+body);
         }
-
     });
-    return null;
-
 };
