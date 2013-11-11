@@ -2,17 +2,21 @@
 <html>
 <% include head.ejs %>
 <body>
-accesstoken: <%= oauth.access_token%>
-<br>
-id:<%= oauth.user.id %>
-<br>
 
-<script type="text/javascript">
-window.app.auth = <%- JSON.stringify(oauth) %>;
-</script>
-
-
+<div class="user">
+    <h2>ようこそ</h2>
+        <p><span class="strong"><%= oauth.user.username %></span>さんのInstagramからカードに使いたい写真を選んでください</p>
+</div>
 <img src="<%= oauth.user.profile_picture %>" style="width: 100px">
 
+
+<div id="photo-select"></div>
+
+<script type="text/javascript">
+    var appinfo={};
+    appinfo.oauth = <%- JSON.stringify(oauth) %>;
+    window.app = appinfo;
+</script>
+<script type="text/javascript" src="/js/instaxmascard.js"></script>
 </body>
 </html>

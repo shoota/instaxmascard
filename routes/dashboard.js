@@ -2,13 +2,8 @@
 /*
  * GET home page.
  */
-//var instagram = require('instagram-node-lib'),
 var request = require('request'),
     igConf=require('../model/ig-conf.json');
-//
-//instagram.set('client_id', igConf.client_id);
-//instagram.set('client_secret', igConf.client_secret);
-//instagram.set('redirect_uri', igConf.redirect_uri);
 
 exports.dashboard = function(req, res){
 
@@ -26,9 +21,10 @@ exports.dashboard = function(req, res){
         json: true
     };
 
+    // oauth process
+    // TODO capsuling to model
     request.post(options, function(error, response, body){
         if (!error && response.statusCode == 200) {
-
             var ejsObj={
                 title:"ダッシュボード",
                 oauth: body
@@ -36,6 +32,7 @@ exports.dashboard = function(req, res){
             res.render('dashboard', ejsObj);
         } else {
             console.log('error: '+ response.statusCode);
+            // TODO error handling
             res.send(500,'auth error'+body);
         }
     });
