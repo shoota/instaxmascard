@@ -10,13 +10,10 @@
 <img src="<%= oauth.user.profile_picture %>" style="width: 100px">
 
 
-<div id="photo-select"></div>
+<div id="photo-select">
+    <input type="button" id="more" value="more...">
+</div>
 
-<script type="text/javascript">
-    var appinfo={};
-    appinfo.oauth = <%- JSON.stringify(oauth) %>;
-    window.app = appinfo;
-</script>
-<script type="text/javascript" src="/js/instaxmascard.js"></script>
+<% include client_app.ejs%>
 </body>
 </html>

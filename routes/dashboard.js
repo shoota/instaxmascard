@@ -36,4 +36,5 @@ exports.dashboard = function(req, res){
             res.send(500,'auth error'+body);
         }
     });
+
 };

@@ -1,55 +1,74 @@
+var MediaModel = Backbone.Model.extend({
+});
 
-$(function() {
+var MediaCollection = Backbone.Collection.extend({
+    model: MediaModel
+});
 
-    var onsccess=function(res, status, xhr){
-        var data = res.data;
-        var next = res.pagination.next_url;
-        data.forEach(function(media){
-            if(media.type == "image"){
-                var src = media.images.low_resolution.url;
-                var ele = '<img src="'+src+'" class="media" >';
-                $('#photo-select').append(ele);
+var MediaView = Backbone.View.extend({
+    template: _.template('<img src="<%= images.thumbnail.url %>" class="media" >'),
+
+    render: function(){
+        return this.template(this.model.toJSON());
+    }
+});
+
+var InstagramView = Backbone.View.extend({
+    el: $("#photo-select"),
+    events: {
+        "click #more": "getMedia"
+    },
+    initialize: function(){
+        this.listenTo(this.collection, 'add', this.render, this);
+        this.getMediaUrl = 'https://api.instagram.com/v1/users/'+window.app.oauth.user.id+'/media/recent';
+
+        this.delegateEvents({"click .media": "onImageClick"});
+    },
+    getMedia: function(){
+        if(!this.getMediaUrl) alert('これ以上はみつかりません');
+        // disable button
+
+        //ajax
+        var url = this.getMediaUrl;
+        var callback = this.onMedia;
+        $.ajax({
+            context: this,
+            type:"GET",
+            url: url,
+            data: {
+                access_token: window.app.oauth.access_token
+            },
+            dataType:'jsonp',
+            success: callback,
+            error: function(){
+                // todo error
             }
         });
-        $('body').append(next);
+    },
+    onMedia: function(res, status, xhr){
+        console.log(res);
+        var data = res.data;
+        this.collection.add(data);
+        //set next_uri
+        this.getMediaUrl = res.pagination.next_url;
+    },
 
-    };
+    onImageClick: function(){
+        // TODO handling user select
+        alert(this.model.id);
+    },
+    render: function(mediaModel){
+        var view = new MediaView({model: mediaModel});
+        console.log(this.getMediaUrl);
+        var html = view.render();
+        console.log(view.el);
+        $(this.el).append(html);
+    }
 
-    $.ajax({
-        type:"GET",
-        url: 'https://api.instagram.com/v1/users/'+window.app.oauth.user.id+'/media/recent',
-        data: {
-            access_token: window.app.oauth.access_token
-        },
-        dataType:'jsonp',
-        success: onsccess,
-        error: function(){
-            // todo error
-        }
-    });
+});
 
 
-//    var requestInstaImage = function(max_id){
-//        var qs = {
-//            access_token: window.app.oauth.access_token ,
-//            max_id: max_id,
-//            user_id: window.app.oauth.user.id
-//        };
-//        $.ajax({
-//            type:"GET",
-//            url: "http://anaguma.org/xmascard/photos",
-//            data: qs,
-//            dataType:'json',
-//            success: function(res, status, xhr){
-//                console.log(res);
-//                if(res.pagination.next_max_id) requestInstaImage(res.pagination.next_max_id);
-//            },
-//            error: function(){
-//                // todo error
-//            }
-//        });
-//
-//    };
-//    // onload process
-//    requestInstaImage();
+$(function() {
+    window.instagramView = new InstagramView({collection: new MediaCollection()});
+    window.instagramView.getMedia();
 });
