@@ -1,4 +1,4 @@
-var cardModel = require('../model/cards.js').cardModel;
+var Cards = require('../model/factory').Cards;
 
 module.exports={
     //カードの一覧を表示
@@ -9,7 +9,7 @@ module.exports={
        };
 
        // 12件のカードを取得する
-       var images=cardModel.findAny();
+       var images=Cards.findAny();
        ejsObj.cards = images;
 
        res.render('cardList', ejsObj);
