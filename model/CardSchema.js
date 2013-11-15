@@ -5,19 +5,11 @@ var mongoose = require('mongoose')
  * Schema Define
  */
 var CardSchema = new Schema({
-    source: Object
+    card_id     : Number,  // TODO autoincrement
+    user_name   : String,
+    source      : Object,
+    file_path   : String,
+    created     : {type: Date, default: Date.now()}
 });
-
-/**
- *
- * @param size
- * @param callback
- * @returns {*}
- */
-CardSchema.statics.findAny = function(size, callback){
-    var opts={};
-    return this.find({},null,opts,callback);
-};
-
 
 module.exports = CardSchema;

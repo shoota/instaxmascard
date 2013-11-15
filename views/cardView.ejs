@@ -2,9 +2,8 @@
 <html>
 <% include head.ejs %>
 <body>
-<h1><a href="<%= card.igsrc%>"><%= card.author %></a><%= message %></h1>
 
-<img src="<%= card.imgsrc %>">
-<p>created by <%= card.author %> at <%= card.date%></p>
+<img src="<%= card.file_path %>">
+<p>this card created by <%= card.user_name %></p>
 </body>
 </html>

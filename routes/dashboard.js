@@ -3,7 +3,8 @@
  * GET home page.
  */
 var request = require('request'),
-    igConf=require('../model/ig-conf.json');
+    igConf=require('../model/ig-conf.json'),
+    User = require('../model/factory').Users;
 
 exports.dashboard = function(req, res){
 
@@ -29,7 +30,9 @@ exports.dashboard = function(req, res){
                 title:"ダッシュボード",
                 oauth: body
             };
-            res.render('dashboard', ejsObj);
+            User.updateOrCreate(body.user, function(){
+                res.render('dashboard', ejsObj);
+            });
         } else {
             console.log('error: '+ response.statusCode);
             // TODO error handling

@@ -1,20 +1,27 @@
 var Cards = require('../model/factory').Cards;
 
+var MAX=12;
+
 module.exports={
-    //カードの一覧を表示
-   index: function(req, res){
-       //ViewHelper
-       var ejsObj={
-           title:"最近つくられたカード"
-       };
 
-       // 12件のカードを取得する
-       var images=Cards.findAny();
-       ejsObj.cards = images;
+    /**
+     * /app_root/cards
+     * @param req
+     * @param res
+     */
+    index: function(req, res){
+        //ViewHelper
+        var ejsObj={
+            title:"最近つくられたカード"
+        };
 
-       res.render('cardList', ejsObj);
+        // 12件のカードを取得する
+        Cards.find({},null,{limit: MAX}, function(images){
+            ejsObj.cards = images;
+            res.render('cardList', ejsObj);
+        });
 
-   },
+    },
 
     //特定のカードを表示
     show:function(req, res){
@@ -26,17 +33,17 @@ module.exports={
         // cardのid=user名を受け取る
         var cardId = req.params.card;
         // カードを取得
-        card = cardModel.findOne(cardId);
+        card = Cards.findOne({card_id:cardId}, function(err, doc){
+            if(err) res.send(500);
 
-        if(card) {
-            ejsObj.message = "さんのつくったカードです";
-            ejsObj.card=card;
+            if(card) {
+                ejsObj.card=doc;
+                res.render('cardView', ejsObj);
+            }else{
+                res.send(404);
+            }
+        });
 
-            res.render('cardView', ejsObj);
-        }else{
-            res.send(404);
-
-        }
     },
 
     // カード生成(POST)
@@ -52,9 +59,12 @@ module.exports={
 
         //画像を生成、画像名を受け取る
 
+        //MongoDBに登録
+
+
+
 
         res.render('cardComp', ejsObj);
 
     }
-
 };
