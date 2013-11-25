@@ -5,12 +5,19 @@
 
 <div class="user">
     <h2>ようこそ</h2>
-        <p><span class="strong"><%= oauth.user.username %></span>さんのInstagramからカードに使いたい写真を選んでください</p>
+
 </div>
-<img src="<%= oauth.user.profile_picture %>" style="width: 100px">
+
+<div id="user">
+    <p>ログイン情報</p>
+    <p class="strong"><%= oauth.user.username %></p>
+    <img src="<%= oauth.user.profile_picture %>" style="width: 100px">
+</div>
+
 
 
 <div id="photo-select">
+    <ul id="photo-list"></ul>
     <input type="button" id="more" value="more...">
 </div>
 

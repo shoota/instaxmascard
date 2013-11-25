@@ -6,10 +6,24 @@ var MediaCollection = Backbone.Collection.extend({
 });
 
 var MediaView = Backbone.View.extend({
+
+    tagName: "li",
+
     template: _.template('<img src="<%= images.thumbnail.url %>" class="media" >'),
 
+    events: {
+        "click": "selected"
+    },
+
+    selected: function(){
+        console.log(this.model);
+        console.log(this.model.get('images'));
+    },
+
+
     render: function(){
-        return this.template(this.model.toJSON());
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
     }
 });
 
@@ -22,7 +36,8 @@ var InstagramView = Backbone.View.extend({
         this.listenTo(this.collection, 'add', this.render, this);
         this.getMediaUrl = 'https://api.instagram.com/v1/users/'+window.app.oauth.user.id+'/media/recent';
 
-        this.delegateEvents({"click .media": "onImageClick"});
+//        var dgEvents = {};
+//        this.delegateEvents(dgEvents);
     },
     getMedia: function(){
         if(!this.getMediaUrl) alert('これ以上はみつかりません');
@@ -46,23 +61,16 @@ var InstagramView = Backbone.View.extend({
         });
     },
     onMedia: function(res, status, xhr){
-        console.log(res);
         var data = res.data;
         this.collection.add(data);
         //set next_uri
         this.getMediaUrl = res.pagination.next_url;
     },
 
-    onImageClick: function(){
-        // TODO handling user select
-        alert(this.model.id);
-    },
     render: function(mediaModel){
         var view = new MediaView({model: mediaModel});
-        console.log(this.getMediaUrl);
-        var html = view.render();
-        console.log(view.el);
-        $(this.el).append(html);
+        var html = view.render().el;
+        this.$('#photo-list').append(html).css({display:'none'}).fadeIn('slow');
     }
 
 });
