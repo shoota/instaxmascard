@@ -33,6 +33,7 @@ exports.dashboard = function(req, res){
 
             res.render('dashboard', ejsObj);
 
+            //FIXME bugs
 //            User.updateOrCreate(body.user, function(){
 //                res.render('dashboard', ejsObj);
 //            });
