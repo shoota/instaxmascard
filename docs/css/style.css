@@ -6,6 +6,10 @@ body {
     color: #737373;
 }
 
+li {
+    list-style-type: none;
+}
+
 .note{
     font-family: 'Amaranth', 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
@@ -28,6 +32,7 @@ body {
     margin-bottom: 10px;
     padding-bottom: 0;
 }
+
 #access{
     padding: 3px;
     width: 600px;
@@ -35,3 +40,8 @@ body {
     padding-bottom: 10px;
 }
 
+.media {
+    border: #000 solid 2px;
+    float: left;
+    margin: 2px;
+}
