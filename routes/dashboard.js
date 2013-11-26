@@ -8,40 +8,46 @@ var request = require('request'),
 
 exports.dashboard = function(req, res){
 
-    var CODE = req.query.code;
-
-    var options = {
-        uri: 'https://api.instagram.com/oauth/access_token',
-        form: {
-            client_id:igConf.client_id,
-            client_secret: igConf.client_secret,
-            grant_type:"authorization_code",
-            redirect_uri:igConf.redirect_uri,
-            code: CODE
-        },
-        json: true
+    var ejsObj={
+        title:"ダッシュボード"
     };
 
-    // oauth process
-    // TODO capsuling to model
-    request.post(options, function(error, response, body){
-        if (!error && response.statusCode == 200) {
-            var ejsObj={
-                title:"ダッシュボード",
-                oauth: body
-            };
+    // reload
+    if(req.session.oauth){
+        ejsObj.oauth = req.session.oauth;
+        console.log('session exists');
+        res.render('dashboard', ejsObj);
+    }else{
+        var CODE = req.query.code;
 
-            res.render('dashboard', ejsObj);
+        var options = {
+            uri: 'https://api.instagram.com/oauth/access_token',
+            form: {
+                client_id:igConf.client_id,
+                client_secret: igConf.client_secret,
+                grant_type:"authorization_code",
+                redirect_uri:igConf.redirect_uri,
+                code: CODE
+            },
+            json: true
+        };
 
-            //FIXME bugs
-//            User.updateOrCreate(body.user, function(){
-//                res.render('dashboard', ejsObj);
-//            });
-        } else {
-            console.log('error: '+ response.statusCode);
-            // TODO error handling
-            res.send(500,'auth error'+body);
-        }
-    });
+        //TODO STAB HERE
 
+
+        // oauth info registration
+        request.post(options, function(error, response, body){
+            if (!error && response.statusCode == 200) {
+
+                req.session.oauth = body;
+                ejsObj.oauth = body;
+                User.updateOrCreate(body.user, function(){
+                    res.render('dashboard', ejsObj);
+                });
+            } else {
+                // TODO error handling
+                res.send(500,'auth error'+body);
+            }
+        });
+    }
 };

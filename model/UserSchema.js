@@ -21,6 +21,7 @@ UserSchema.statics.updateOrCreate = function(userProperty, callback){
     var user = this;
     user.findOne({user_id: userProperty.id}, function(err, doc){
         if(err) {
+            console.log('find error');
             callback(err);
         } else if(doc){
             callback(null, doc);
@@ -41,3 +42,5 @@ UserSchema.statics.updateOrCreate = function(userProperty, callback){
         }
     });
 };
+
+module.exports=UserSchema;
