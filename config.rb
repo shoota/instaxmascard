@@ -21,3 +21,5 @@ javascripts_dir = "docs/js"
 line_comments = false
 
 preferred_syntax = :sass
+
+require "susy"
