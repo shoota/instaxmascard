@@ -34,7 +34,7 @@ app.get('/xmascard', routes.index);
 app.get('/xmascard/auth', require('./routes/oauth').igauth);
 app.get('/xmascard/dashboard', require('./routes/dashboard').dashboard);
 app.resource('xmascard/cards', require('./routes/cards'));
-app.resource('xmascard/photos', require('./routes/photos'));
+app.resource('xmascard/users', require('./routes/users'));
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log("Express server listening on port " + app.get('port'));

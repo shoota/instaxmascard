@@ -1,11 +1,13 @@
-var Cards = require('../model/factory').Cards;
+var factory = require('../model/factory')
+   ,Cards = factory.Card
+   ,Sequence = factory.Sequence;
 
 var MAX=12;
 
 module.exports={
 
     /**
-     * /app_root/cards
+     * /xmascard/cards
      * @param req
      * @param res
      */
@@ -23,21 +25,27 @@ module.exports={
 
     },
 
-    //特定のカードを表示
+    /**
+     * /xmascard/show/:id
+     * 特定のカードを表示
+     * @param req
+     * @param res
+     */
     show:function(req, res){
-
-        //ViewHelper
-        var ejsObj ={
-            title: "insta X'mas card"
-        };
-        // cardのid=user名を受け取る
+        // cardのid
         var cardId = req.params.card;
         // カードを取得
         card = Cards.findOne({card_id:cardId}, function(err, doc){
+            //ViewHelper
+            var ejsObj ={};
+
             if(err) res.send(500);
 
             if(card) {
-                ejsObj.card=doc;
+                ejsObj = {
+                    card:doc,
+                    title: doc.user_name + "のクリスマスカード"
+                };
                 res.render('cardView', ejsObj);
             }else{
                 res.send(404);
@@ -48,23 +56,48 @@ module.exports={
 
     // カード生成(POST)
     create: function(req, res){
-        var ejsObj={
-            title:""
-        };
-        // ViewHelper
 
-        // POSTデータを取得
+        if( !req.session.oauth ){
+            res.send(500);
+        } else {
 
-        // 画像生成ロジックを生成
+            // request
+            var postData = req.body;
+            // session
+            var auth = req.session.oauth;
 
-        //画像を生成、画像名を受け取る
+            //仕様する画像
+            var image = postData.image;
 
-        //MongoDBに登録
+            // POSTデータを取得、カードデータを作成
+            var registerCardData = function(filePath){
+                Sequence.getCardNumber(function(err, doc){
+                    var createCard = new Cards({
+                        card_id     : doc.seq,
+                        user_name   : auth.user.username,
+                        source      : postData,
+                        file_path   : filePath
+                    });
+                    createCard.save(function(err){
+                        if(err){
+                            res.send(500);
+                        }else{
+                            var ejsObj={
+                                title:"クリスマスカード完成",
+                                card_img: filePath
+                            };
+                            res.render('cardComp', ejsObj);
+                        }
+                    });
+                });
+            };
 
 
+            // 画像生成ロジックを起動
+            // imageCreate(postData, registerCardData);
 
-
-        res.render('cardComp', ejsObj);
-
+        }
     }
+
+
 };

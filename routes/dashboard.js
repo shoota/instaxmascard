@@ -4,7 +4,7 @@
  */
 var request = require('request'),
     igConf=require('../model/ig-conf.json'),
-    User = require('../model/factory').Users;
+    User = require('../model/factory').User;
 
 exports.dashboard = function(req, res){
 
@@ -15,11 +15,9 @@ exports.dashboard = function(req, res){
     // reload
     if(req.session.oauth){
         ejsObj.oauth = req.session.oauth;
-        console.log('session exists');
         res.render('dashboard', ejsObj);
     }else{
         var CODE = req.query.code;
-
         var options = {
             uri: 'https://api.instagram.com/oauth/access_token',
             form: {
@@ -34,19 +32,16 @@ exports.dashboard = function(req, res){
 
         //TODO STAB HERE
 
-
         // oauth info registration
         request.post(options, function(error, response, body){
             if (!error && response.statusCode == 200) {
-
                 req.session.oauth = body;
                 ejsObj.oauth = body;
                 User.updateOrCreate(body.user, function(){
                     res.render('dashboard', ejsObj);
                 });
             } else {
-                // TODO error handling
-                res.send(500,'auth error'+body);
+                res.send(500);
             }
         });
     }
