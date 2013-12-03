@@ -1,11 +1,13 @@
-var MediaModel = Backbone.Model.extend({
+IstxcApp = {};
+
+IstxcApp.MediaModel = Backbone.Model.extend({
 });
 
-var MediaCollection = Backbone.Collection.extend({
-    model: MediaModel
+IstxcApp.MediaCollection = Backbone.Collection.extend({
+    model: IstxcApp.MediaModel
 });
 
-var MediaView = Backbone.View.extend({
+IstxcApp.MediaView = Backbone.View.extend({
 
     tagName: "li",
 
@@ -16,8 +18,7 @@ var MediaView = Backbone.View.extend({
     },
 
     selected: function(){
-        console.log(this.model);
-        console.log(this.model.get('images'));
+        IstxcApp.mediator.trigger('select', this.model);
     },
 
 
@@ -27,18 +28,23 @@ var MediaView = Backbone.View.extend({
     }
 });
 
-var InstagramView = Backbone.View.extend({
-    el: $("#photo-select"),
+IstxcApp.InstagramView = Backbone.View.extend({
+    el: $("#board"),
     events: {
-        "click #more": "getMedia"
+        "click #more": "getMedia",
+        "click #create": "post"
     },
+
     initialize: function(){
+
         this.listenTo(this.collection, 'add', this.render, this);
         this.getMediaUrl = 'https://api.instagram.com/v1/users/'+window.app.oauth.user.id+'/media/recent';
-
-//        var dgEvents = {};
-//        this.delegateEvents(dgEvents);
+        // global events
+        IstxcApp.mediator = {};
+        _.extend(IstxcApp.mediator, Backbone.Events);
+        IstxcApp.mediator.on('select', this.selectImage, this);
     },
+
     getMedia: function(){
         if(!this.getMediaUrl) alert('これ以上はみつかりません');
         // disable button
@@ -68,15 +74,37 @@ var InstagramView = Backbone.View.extend({
     },
 
     render: function(mediaModel){
-        var view = new MediaView({model: mediaModel});
+        var view = new IstxcApp.MediaView({model: mediaModel});
         var html = view.render().el;
         this.$('#photo-list').append(html).css({display:'none'}).fadeIn('slow');
+    },
+
+    selectImage: function(model) {
+        this.media = model;
+        this.$('#create').show();
+    },
+
+    post: function(){
+
+        if(!this.media){
+            alert('写真を選択してください');
+            return;
+        }
+
+        var source = {};
+        source.images = this.media.get('images');
+
+        this.$el.fadeOut('slow');
+
+//        $.ajax();
+
+
     }
 
 });
 
 
 $(function() {
-    window.instagramView = new InstagramView({collection: new MediaCollection()});
-    window.instagramView.getMedia();
+    var instagramView = new IstxcApp.InstagramView({collection: new IstxcApp.MediaCollection()});
+    instagramView.getMedia();
 });

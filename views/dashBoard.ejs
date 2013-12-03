@@ -34,13 +34,21 @@
         <option value="2">GoogleWebFont2</option>
         <option value="3">GoogleWebFont3</option>
     </select>
-    font-color:<input type="color">
-</div>
+    Color：
+    <select name="font" id="color">
+        <option value="0">RED</option>
+        <option value="1">GREEN</option>
+        <option value="2">GOLD</option>
+        <option value="3">WHITE</option>
+    </select>
 
+    <input type="submit" id="create" value="CREATE">
 
-<div id="photo-select">
-    <ul id="photo-list"></ul>
-    <input type="button" id="more" value="more...">
+    <div id="photo-select">
+        <ul id="photo-list"></ul>
+        <input type="button" id="more" value="more...">
+    </div>
+
 </div>
 
 <% include client_app.ejs%>
