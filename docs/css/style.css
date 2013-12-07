@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Amaranth);
 .container {
   *zoom: 1;
@@ -83,8 +84,12 @@ header, #main-content, footer {
   }
 }
 body {
-  background: url("/img/bg.jpg");
-  background-size: contain;
+  font-family: "ヒラギノ明朝 Pro W3", serif;
+  background-image: url("/img/02.jpg");
+  color: white;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  line-height: 1.8em;
 }
 
 h1 {
@@ -98,6 +103,17 @@ footer {
   color: white;
 }
 
+.blur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1;
+}
+.blur img {
+  width: 100%;
+}
+
 .container img {
   max-width: 100%;
   height: auto;
@@ -108,7 +124,26 @@ footer {
 }
 .intro .image {
   max-width: 755px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
+}
+.intro .description {
+  background-color: white;
+  -webkit-box-shadow: 0 3px 5px rgba(59, 65, 98, 0.6);
+  box-shadow: 0 3px 5px rgba(59, 65, 98, 0.6);
+  max-width: 675px;
+  margin: 0 auto 50px;
+  padding: 30px;
+  color: #a18a5d;
+}
+.intro .description h2 {
+  font-size: 200%;
+  letter-spacing: 0.1em;
+  font-weight: normal;
+  line-height: 1.5em;
+}
+.intro .description p {
+  font-size: 112%;
+  line-height: 1.8em;
 }
 .intro .button {
   max-width: 215px;
