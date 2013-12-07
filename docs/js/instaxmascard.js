@@ -101,8 +101,7 @@ IstxcApp.InstagramView = Backbone.View.extend({
                 async:false,
                 data: form,
                 success: function(location){
-                    console.log('success: '+ location);
-//                    location.href =
+                    location.href = 'xmascard/'+location;
                 }
             });
 
