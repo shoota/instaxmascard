@@ -81,11 +81,9 @@ IstxcApp.InstagramView = Backbone.View.extend({
 
     selectImage: function(model) {
         this.media = model;
-        this.$('#create').show();
     },
 
     post: function(){
-
         if(!this.media){
             alert('写真を選択してください');
             return;
@@ -94,11 +92,24 @@ IstxcApp.InstagramView = Backbone.View.extend({
         var source = {};
         source.images = this.media.get('images');
 
-        this.$el.fadeOut('slow');
+        if(confirm('これでつくりますか？')){
+            var form={};
+            form.images = this.media.get('images');
 
-//        $.ajax();
+            $.ajax({
+                type: 'post',
+                url: '/xmascard/cards/',
+                async:false,
+                data: form,
+                success: function(){
+                    console.log('success');
+//                    location.href =
+                }
+            });
 
 
+        }
+//        this.$el.fadeOut('slow');
     }
 
 });

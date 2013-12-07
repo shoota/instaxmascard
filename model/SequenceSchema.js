@@ -14,6 +14,9 @@ var SequenceSchmma = new Schema({
  * @returns {*|null}
  */
 SequenceSchmma.statics.getCardNumber = function(callback){
+
+    console.log('call cardNumber');
+
     var key = "card_id";
 
     return this.collection.findAndModify(

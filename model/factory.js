@@ -12,5 +12,5 @@ module.exports ={
     // name, schema, collection
     Card: mongoose.model('Cards', cardSchema, 'cards'),
     User: mongoose.model('Users', userSchema, 'users'),
-    Sequence: mongoose.model('Sequence', sequenceSchema, 'sequence')
+    Sequence: mongoose.model('Sequences', sequenceSchema, 'sequence')
 };

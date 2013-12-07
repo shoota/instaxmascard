@@ -61,41 +61,37 @@ module.exports={
             res.send(500);
         } else {
 
+
+            var source = {};
+
             // request
             var postData = req.body;
+//            console.log(postData);
+            source.images = postData.images;
+
             // session
             var auth = req.session.oauth;
 
-            //仕様する画像
-            var image = postData.image;
-
             // POSTデータを取得、カードデータを作成
-            var registerCardData = function(filePath){
-                Sequence.getCardNumber(function(err, doc){
-                    var createCard = new Cards({
-                        card_id     : doc.seq,
-                        user_name   : auth.user.username,
-                        source      : postData,
-                        file_path   : filePath
-                    });
-                    createCard.save(function(err){
-                        if(err){
-                            res.send(500);
-                        }else{
-                            var ejsObj={
-                                title:"クリスマスカード完成",
-                                card_img: filePath
-                            };
-                            res.render('cardComp', ejsObj);
-                        }
-                    });
-                });
-            };
+            Sequence.getCardNumber(function(err, doc){
+                if(err) console.log(err);
 
+                console.log(doc);
+                res.send(200);
 
-            // 画像生成ロジックを起動
-            // imageCreate(postData, registerCardData);
-
+//                var createCard = new Cards({
+//                    card_id     : doc.seq,
+//                    user_name   : auth.user.username,
+//                    source      : source
+//                });
+//                createCard.save(function(err){
+//                    if(err){
+//                        res.send(500);
+//                    }else{
+//                        res.send('cards/'+doc.seq);
+//                    }
+//                });
+            });
         }
     }
 
