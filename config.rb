@@ -1,4 +1,6 @@
 # Require any additional compass plugins here.
+require "compass"
+require "susy"
 
 # Set this to the root of your project when deployed:
 http_path = "/"
@@ -21,5 +23,3 @@ javascripts_dir = "docs/js"
 line_comments = false
 
 preferred_syntax = :sass
-
-require "susy"
