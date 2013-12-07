@@ -1,9 +1,136 @@
 @import url(http://fonts.googleapis.com/css?family=Amaranth);
+.container {
+  *zoom: 1;
+  max-width: 460px;
+  _width: 460px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+header, #main-content, footer {
+  overflow: hidden;
+  *zoom: 1;
+}
+
+@media (min-width: 620px) {
+  .container {
+    max-width: 620px;
+  }
+}
+@media (min-width: 940px) {
+  .container {
+    max-width: 940px;
+  }
+}
+@media (min-width: 1260px) {
+  .container {
+    max-width: 1260px;
+  }
+}
+@media (min-width: 620px) {
+  .thunbnails {
+    width: 100%;
+    float: left;
+    margin-right: 3.22581%;
+  }
+  .thunbnails .thumbnail {
+    width: 48.3871%;
+    float: left;
+    margin-right: 3.22581%;
+  }
+  .thunbnails .thumbnail:nth-child(2n) {
+    float: right;
+    margin-right: 0;
+  }
+}
+@media (min-width: 940px) {
+  .thunbnails {
+    width: 100%;
+    float: left;
+    margin-right: 2.12766%;
+  }
+  .thunbnails .thumbnail {
+    width: 23.40426%;
+    float: left;
+    margin-right: 2.12766%;
+  }
+  .thunbnails .thumbnail:nth-child(3n) {
+    float: right;
+    margin-right: 0;
+  }
+}
+@media (min-width: 1260px) {
+  .thunbnails {
+    width: 100%;
+    float: left;
+    margin-right: 1.5873%;
+  }
+  .thunbnails .thumbnail {
+    width: 23.80952%;
+    float: left;
+    margin-right: 1.5873%;
+  }
+  .thunbnails .thumbnail:nth-child(4n) {
+    float: right;
+    margin-right: 0;
+  }
+}
 body {
-  padding-top: 50px;
-  padding-bottom: 20px;
-  background-image: url("fabric_of_squares_gray.png");
-  color: #737373;
+  background: url("/img/bg.png");
+  background-size: contain;
+}
+
+h1 {
+  max-width: 463px;
+  margin: 50px auto;
+}
+
+footer {
+  margin-top: 3em;
+  text-align: right;
+  color: white;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.intro {
+  margin-bottom: 100px;
+}
+.intro .image {
+  max-width: 755px;
+  margin: 0 auto;
+}
+.intro .button {
+  max-width: 215px;
+  margin: 0 auto;
+}
+.intro .button:hover {
+  opacity: 0.8;
+}
+
+.thumbnails .thumbnail {
+  margin-bottom: 20px;
+}
+.thumbnails .thumbnail img {
+  max-width: 311px;
+  margin-bottom: 20px;
+  -webkit-transition-property: all;
+  -webkit-transition-duration: 0.1s;
+  -webkit-transition-timing-function: ease-in;
+  -webkit-transition-delay: 0;
+}
+.thumbnails .thumbnail img:hover {
+  -webkit-transform: scale3d(1.05, 1.05, 1.05);
 }
 
 li {
