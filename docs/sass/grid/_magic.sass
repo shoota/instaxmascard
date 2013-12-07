@@ -21,6 +21,7 @@ $grid-padding       : $gutter-width / 2
 //   max-width: 1380px
 
 // Define breakpoints, in this case when there's room for the specified columns.
+$break-phone:    4
 $break-tablet:   8
 $break-desktop: 12
 $break-huge:    16
@@ -37,35 +38,12 @@ header, #main-content, footer
 
 // Automatically reset the grid width & re-apply the grid background
 // to responsive layouts.
-$layouts: $break-tablet, $break-desktop, $break-huge
+$layouts: $break-phone, $break-tablet, $break-desktop, $break-huge
 @each $layout in $layouts
   @include at-breakpoint($layout)
     .container
       @include set-container-width
       // @include susy-grid-background
-
-@include at-breakpoint($break-tablet)
-  .thunbnails
-    @include span-columns(8)
-    .thumbnail
-      @include span-columns(4, 8)
-      @include nth-omega(2n)
-
-@include at-breakpoint($break-desktop)
-  .thunbnails
-    @include span-columns(12, 12)
-    .thumbnail
-      @include span-columns(3, 12)
-      @include nth-omega(3n)
-
-@include at-breakpoint($break-huge)
-  .thunbnails
-    @include span-columns(16, 16)
-    .thumbnail
-      @include span-columns(4, 16)
-      @include nth-omega(4n)
-
-
 
 
 

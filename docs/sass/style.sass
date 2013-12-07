@@ -11,6 +11,7 @@
 @import "grid/magic"
 
 // Your own styles go here.
+
 body
   font-family: 'ヒラギノ明朝 Pro W3',serif
   background-image: url("/img/02.jpg")
@@ -69,18 +70,33 @@ footer
     &:hover
       opacity: .8
 
-.thumbnails
-  .thumbnail
-    margin-bottom: 20px
+#photo-select
+  margin: 50px auto
+ul#photo-list
+  margin: 0 0 0 -10px
+  padding: 0
+  overflow: 0
+  li
+    display: inline-block
+    padding: 0
+    line-height: 1.0
     img
-      max-width: 311px
-      margin-bottom: 20px
+      display: inline-block
+      margin-left: 5px
+      line-height: 1.0
       -webkit-transition-property: all
       -webkit-transition-duration: .1s
       -webkit-transition-timing-function: ease-in
       -webkit-transition-delay: 0
+      -webkit-box-shadow: 0 3px 5px rgba(59, 65, 98, 0.6)
+      box-shadow: 0 3px 5px rgba(59, 65, 98, 0.6)
       &:hover
+        position: relative
         -webkit-transform: scale3d(1.05,1.05,1.05)
+        opacity: .8
+        cursor: pointer
+
+
 
 li
   list-style-type: none
@@ -110,8 +126,3 @@ li
   width: 600px
   padding-top: 10px
   padding-bottom: 10px
-
-.media
-  border: #000 solid 2px
-  float: left
-  margin: 2px
