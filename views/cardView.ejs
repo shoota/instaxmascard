@@ -2,8 +2,13 @@
 <html>
 <% include head.ejs %>
 <body>
-
-<img src="<%= card.file_path %>">
 <p>this card created by <%= card.user_name %></p>
+
+<div id="xmascard">
+    <h3><%= card.source.form.message %></h3>
+    <img src="<%= card.source.images.low_resolution.url %>" alt=""/>
+    <p>TO: <%= card.source.form.to %></p>
+</div>
+
 </body>
 </html>
