@@ -2,7 +2,14 @@
 <html>
 <% include head.ejs %>
 <body>
-<h1><%= message %></h1>
+<div class="container">
+<header>
+<h1>
+  <img src="/img/logo.png" alt="Insta X'mas Card">
+</h1>
+</header>
+<div id="main-content">
+<h2><%= message %></h2>
 <p>Welcome to <%= title %></p>
 
 <p>
@@ -20,6 +27,8 @@
 <a href="<%= authURI %>">Create?</a>
 
 <p>&copy;anaguma.org</p>
+</div>
+</div>
 </body>
 
 </html>
