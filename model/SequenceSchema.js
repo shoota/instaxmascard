@@ -14,18 +14,15 @@ var SequenceSchmma = new Schema({
  * @returns {*|null}
  */
 SequenceSchmma.statics.getCardNumber = function(callback){
-
-    console.log('call cardNumber');
-
     var key = "card_id";
+    var seq = this;
 
-    return this.collection.findAndModify(
+    return seq.collection.findAndModify(
         { _id: key},  // query
         [],           // sort
         { $inc:{seq:1}}, // increment command
         { new:true, unsert: true},
-        callback
-    );
+        callback);
 };
 
 module.exports=SequenceSchmma;

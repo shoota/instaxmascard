@@ -74,23 +74,20 @@ module.exports={
 
             // POSTデータを取得、カードデータを作成
             Sequence.getCardNumber(function(err, doc){
-                if(err) console.log(err);
+                if(err) res.send(500);
 
-                console.log(doc);
-                res.send(200);
-
-//                var createCard = new Cards({
-//                    card_id     : doc.seq,
-//                    user_name   : auth.user.username,
-//                    source      : source
-//                });
-//                createCard.save(function(err){
-//                    if(err){
-//                        res.send(500);
-//                    }else{
-//                        res.send('cards/'+doc.seq);
-//                    }
-//                });
+                var createCard = new Cards({
+                    card_id     : doc.seq,
+                    user_name   : auth.user.username,
+                    source      : source
+                });
+                createCard.save(function(err){
+                    if(err){
+                        res.send(500);
+                    }else{
+                        res.send('cards/'+doc.seq);
+                    }
+                });
             });
         }
     }

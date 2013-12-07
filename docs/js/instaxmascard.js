@@ -95,21 +95,18 @@ IstxcApp.InstagramView = Backbone.View.extend({
         if(confirm('これでつくりますか？')){
             var form={};
             form.images = this.media.get('images');
-
             $.ajax({
                 type: 'post',
                 url: '/xmascard/cards/',
                 async:false,
                 data: form,
-                success: function(){
-                    console.log('success');
+                success: function(location){
+                    console.log('success: '+ location);
 //                    location.href =
                 }
             });
 
-
         }
-//        this.$el.fadeOut('slow');
     }
 
 });
