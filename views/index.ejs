@@ -2,24 +2,41 @@
 <html>
 <% include head.ejs %>
 <body>
-<h1><%= message %></h1>
-<p>Welcome to <%= title %></p>
+<div class="container">
+<header>
+<h1>
+  <img src="/img/logo.png" alt="Insta X'mas Card">
+</h1>
+</header>
+<div id="main-content">
+<div class="intro">
+  <div class="image">
+    <img src="/img/main-photo.png" alt="">
+  </div>
+  <div class="description">
+    <h2>Insta X'mas Cardへようこそ。</h2>
+    <p>
+      あなたが撮影したInstagramの写真で、素敵なクリスマスカードをつくりませんか？<br>
+      カードごとに専用のURLが用意されるので、twitterやFacebookから簡単にシェアすることができます。<br>
+      ダウンロードもできるので、はがきに印刷したり、iPhoneの壁紙にしてもいいかもしれません。
+    </p>
+    <div class="button">
+      <a href="<%= authURI %>">
+        <img src="/img/button.png" alt="">
+      </a>
+    </div>
+  </div>
+</div>
 
-<p>
-    Insta X'mas Cardへようこそ。<br>
-    あなたが撮影したInstagramの写真で、素敵なクリスマスカードをつくりませんか？<br>
-    カードごとに専用のURLが用意されるので、twitterやFacebookから簡単にシェアすることができます。<br>
-    ダウンロードもできるので、はがきに印刷したり、iPhoneの壁紙にしてもいいかもしれません。
+<div class="thumbnails">
+  <div class="thumbnail">
+    <img src="/img/thumbnail.png" alt="">
+  </div>
+</div>
 
-    <span>
-
-    </span>
-</p>
-
-
-<a href="<%= authURI %>">Create?</a>
-
-<p>&copy;anaguma.org</p>
+<footer><p>&copy;anaguma.org</p></footer>
+</div>
+</div>
 </body>
 
 </html>

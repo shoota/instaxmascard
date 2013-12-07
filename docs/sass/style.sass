@@ -1,0 +1,117 @@
+@import url(http://fonts.googleapis.com/css?family=Amaranth)
+@import compass
+@import susy
+
+//
+// Main Stylesheet
+//
+
+// Susy Grid Systems - choose one to customize
+// @import "grid/fixed"
+@import "grid/magic"
+
+// Your own styles go here.
+body
+  font-family: 'ヒラギノ明朝 Pro W3',serif
+  background-image: url("/img/02.jpg")
+  color: #ffffff
+  font-size: 16px
+  letter-spacing: 0.1em
+  line-height: 1.8em
+h1
+  max-width: 463px
+  margin: 50px auto
+footer
+  margin-top: 3em
+  text-align: right
+  color: #ffffff
+
+.blur
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  z-index: -1
+  img
+    width: 100%
+
+
+.container
+  // Force images to scale down to their container widths.
+  img
+    max-width: 100%
+    height: auto
+
+.intro
+  margin-bottom: 100px
+  .image
+    max-width: 755px
+    margin: 0 auto 50px
+  .description
+    background-color: #fff
+    -webkit-box-shadow: 0 3px 5px rgba(59, 65, 98, 0.6)
+    box-shadow: 0 3px 5px rgba(59, 65, 98, 0.6)
+    max-width: 675px
+    margin: 0 auto 50px
+    padding: 30px
+    color: #a18a5d
+    h2
+      font-size: 200%
+      letter-spacing: 0.1em
+      font-weight: normal
+      line-height: 1.5em
+    p
+      font-size: 112%
+      line-height: 1.8em
+  .button
+    max-width: 215px
+    margin: 0 auto
+    &:hover
+      opacity: .8
+
+.thumbnails
+  .thumbnail
+    margin-bottom: 20px
+    img
+      max-width: 311px
+      margin-bottom: 20px
+      -webkit-transition-property: all
+      -webkit-transition-duration: .1s
+      -webkit-transition-timing-function: ease-in
+      -webkit-transition-delay: 0
+      &:hover
+        -webkit-transform: scale3d(1.05,1.05,1.05)
+
+li
+  list-style-type: none
+
+.note
+  font-family: 'Amaranth', 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-size: 16px
+  margin-bottom: 0
+
+.b-line-touch
+  margin-bottom: 0
+
+.caption
+  font-family: 'Amaranth', 'Lato', "Helvetica Neue", Helvetica, Arial, sans-serif
+  font-size: 12px
+
+.strong-text
+  font-weight: bold
+
+.v-margin
+  margin-top: 5%
+  margin-bottom: 10px
+  padding-bottom: 0
+
+#access
+  padding: 3px
+  width: 600px
+  padding-top: 10px
+  padding-bottom: 10px
+
+.media
+  border: #000 solid 2px
+  float: left
+  margin: 2px
