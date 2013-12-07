@@ -20,6 +20,11 @@ header, #main-content, footer {
   *zoom: 1;
 }
 
+@media (min-width: 300px) {
+  .container {
+    max-width: 300px;
+  }
+}
 @media (min-width: 620px) {
   .container {
     max-width: 620px;
@@ -33,54 +38,6 @@ header, #main-content, footer {
 @media (min-width: 1260px) {
   .container {
     max-width: 1260px;
-  }
-}
-@media (min-width: 620px) {
-  .thunbnails {
-    width: 100%;
-    float: left;
-    margin-right: 3.22581%;
-  }
-  .thunbnails .thumbnail {
-    width: 48.3871%;
-    float: left;
-    margin-right: 3.22581%;
-  }
-  .thunbnails .thumbnail:nth-child(2n) {
-    float: right;
-    margin-right: 0;
-  }
-}
-@media (min-width: 940px) {
-  .thunbnails {
-    width: 100%;
-    float: left;
-    margin-right: 2.12766%;
-  }
-  .thunbnails .thumbnail {
-    width: 23.40426%;
-    float: left;
-    margin-right: 2.12766%;
-  }
-  .thunbnails .thumbnail:nth-child(3n) {
-    float: right;
-    margin-right: 0;
-  }
-}
-@media (min-width: 1260px) {
-  .thunbnails {
-    width: 100%;
-    float: left;
-    margin-right: 1.5873%;
-  }
-  .thunbnails .thumbnail {
-    width: 23.80952%;
-    float: left;
-    margin-right: 1.5873%;
-  }
-  .thunbnails .thumbnail:nth-child(4n) {
-    float: right;
-    margin-right: 0;
   }
 }
 body {
@@ -153,19 +110,36 @@ footer {
   opacity: 0.8;
 }
 
-.thumbnails .thumbnail {
-  margin-bottom: 20px;
+#photo-select {
+  margin: 50px auto;
 }
-.thumbnails .thumbnail img {
-  max-width: 311px;
-  margin-bottom: 20px;
+
+ul#photo-list {
+  margin: 0 0 0 -10px;
+  padding: 0;
+  overflow: 0;
+}
+ul#photo-list li {
+  display: inline-block;
+  padding: 0;
+  line-height: 1;
+}
+ul#photo-list li img {
+  display: inline-block;
+  margin-left: 5px;
+  line-height: 1;
   -webkit-transition-property: all;
   -webkit-transition-duration: 0.1s;
   -webkit-transition-timing-function: ease-in;
   -webkit-transition-delay: 0;
+  -webkit-box-shadow: 0 3px 5px rgba(59, 65, 98, 0.6);
+  box-shadow: 0 3px 5px rgba(59, 65, 98, 0.6);
 }
-.thumbnails .thumbnail img:hover {
+ul#photo-list li img:hover {
+  position: relative;
   -webkit-transform: scale3d(1.05, 1.05, 1.05);
+  opacity: 0.8;
+  cursor: pointer;
 }
 
 li {
@@ -202,10 +176,4 @@ li {
   width: 600px;
   padding-top: 10px;
   padding-bottom: 10px;
-}
-
-.media {
-  border: black solid 2px;
-  float: left;
-  margin: 2px;
 }
