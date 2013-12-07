@@ -35,13 +35,13 @@ module.exports={
         // cardのid
         var cardId = req.params.card;
         // カードを取得
-        card = Cards.findOne({card_id:cardId}, function(err, doc){
+        Cards.findOne({card_id:cardId}, function(err, doc){
             //ViewHelper
             var ejsObj ={};
 
             if(err) res.send(500);
 
-            if(card) {
+            if(doc) {
                 ejsObj = {
                     card:doc,
                     title: doc.user_name + "のクリスマスカード"
@@ -61,14 +61,8 @@ module.exports={
             res.send(500);
         } else {
 
-
-            var source = {};
-
             // request
             var postData = req.body;
-//            console.log(postData);
-            source.images = postData.images;
-
             // session
             var auth = req.session.oauth;
 
@@ -79,7 +73,7 @@ module.exports={
                 var createCard = new Cards({
                     card_id     : doc.seq,
                     user_name   : auth.user.username,
-                    source      : source
+                    source      : postData
                 });
                 createCard.save(function(err){
                     if(err){

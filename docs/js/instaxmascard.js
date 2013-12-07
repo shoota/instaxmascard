@@ -32,7 +32,11 @@ IstxcApp.InstagramView = Backbone.View.extend({
     el: $("#board"),
     events: {
         "click #more": "getMedia",
-        "click #create": "post"
+        "click #create": "post",
+        "change #greeting": "setGreeting",
+        "change #to": "setTo",
+        "change #font": "setFont",
+        "change #color": "setColor"
     },
 
     initialize: function(){
@@ -43,11 +47,27 @@ IstxcApp.InstagramView = Backbone.View.extend({
         IstxcApp.mediator = {};
         _.extend(IstxcApp.mediator, Backbone.Events);
         IstxcApp.mediator.on('select', this.selectImage, this);
+        this.form={};
+    },
+
+    setGreeting: function(){
+        this.form.message = $('#greeting option:selected').text();
+    },
+
+    setTo: function(){
+        this.form.to = $('#to').val();
+    },
+
+    setFont: function(){
+        this.form.font = $('#font option:selected').text();
+    },
+
+    setColor: function(){
+        this.form.font = $('#color option:selected').text();
     },
 
     getMedia: function(){
         if(!this.getMediaUrl) alert('これ以上はみつかりません');
-        // disable button
 
         //ajax
         var url = this.getMediaUrl;
@@ -62,7 +82,7 @@ IstxcApp.InstagramView = Backbone.View.extend({
             dataType:'jsonp',
             success: callback,
             error: function(){
-                // todo error
+                alert('instagramとの通信でエラーが発生しました');
             }
         });
     },
@@ -88,20 +108,21 @@ IstxcApp.InstagramView = Backbone.View.extend({
             alert('写真を選択してください');
             return;
         }
-
         var source = {};
         source.images = this.media.get('images');
 
         if(confirm('これでつくりますか？')){
-            var form={};
-            form.images = this.media.get('images');
+            var form={
+                images: this.media.get('images'),
+                form: this.form
+            };
             $.ajax({
                 type: 'post',
                 url: '/xmascard/cards/',
                 async:false,
                 data: form,
                 success: function(location){
-                    location.href = 'xmascard/'+location;
+                    document.location = location;
                 }
             });
 
