@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
 <% include head.ejs %>
+<link rel="stylesheet" href="/css/xmascard.css"/>
 <body>
-<p>this card created by <%= card.user_name %></p>
 
 <div id="xmascard">
-    <h3><%= card.source.form.message %></h3>
-    <img src="<%= card.source.images.low_resolution.url %>" alt=""/>
-    <p>TO: <%= card.source.form.to %></p>
+    <div class="card-txt">
+        <div  id="card-h"><%= card.source.form.message %></div>
+    </div>
+    <div id="card-img"><img src="<%= card.source.images.low_resolution.url %>"></div>
+    <div class="card-txt">
+        <div id="card-f">TO: <%= card.source.form.to %></div>
+    </div>
+    <div id="user">
+        <p>created by <a href="http://instagram.com/<%= card.user.username %>" target="_blank"><%= card.user.username %></a></p>
+    </div>
 </div>
 
 </body>

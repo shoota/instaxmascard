@@ -59,11 +59,11 @@ IstxcApp.InstagramView = Backbone.View.extend({
     },
 
     setFont: function(){
-        this.form.font = $('#font option:selected').text();
+        this.form.font = $('#font option:selected').val();
     },
 
     setColor: function(){
-        this.form.font = $('#color option:selected').text();
+        this.form.color = $('#color option:selected').val();
     },
 
     getMedia: function(){

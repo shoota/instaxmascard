@@ -44,7 +44,7 @@ module.exports={
             if(doc) {
                 ejsObj = {
                     card:doc,
-                    title: doc.user_name + "のクリスマスカード"
+                    title: doc.user.username + "のクリスマスカード"
                 };
                 res.render('cardView', ejsObj);
             }else{
@@ -72,7 +72,7 @@ module.exports={
 
                 var createCard = new Cards({
                     card_id     : doc.seq,
-                    user_name   : auth.user.username,
+                    user        : auth.user,
                     source      : postData
                 });
                 createCard.save(function(err){

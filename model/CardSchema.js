@@ -7,7 +7,7 @@ var mongoose = require('mongoose')
  */
 var CardSchema = new Schema({
     card_id     : Number,
-    user_name   : String,
+    user        : Object,
     source      : Object,
     created     : {type: Date, default: Date.now()}
 });

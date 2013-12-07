@@ -11,9 +11,9 @@
 </div>
 
 <div id="user">
-    <p>ログイン情報</p>
+    <p>Instagram account</p>
     <p class="strong"><%= oauth.user.username %></p>
-    <img src="<%= oauth.user.profile_picture %>" style="width: 100px">
+    <img id="prof-pict" src="<%= oauth.user.profile_picture %>">
 </div>
 
 
@@ -24,14 +24,12 @@
         <option value="1">Merry Christmas!</option>
         <option value="2">Happy Holidays!</option>
         <option value="4">Ho Ho Ho!</option>
-        <option value="5">hoge</option>
-        <option value="6">foo</option>
     </select>
 
     To：<input id="to" type="text" value="" maxlength="10">
     Font：
     <select name="font" id="font">
-        <option value="0">Default</option>
+        <option value="0">Default(Playfair Display)</option>
         <option value="1">GoogleWebFont1</option>
         <option value="2">GoogleWebFont2</option>
         <option value="3">GoogleWebFont3</option>
